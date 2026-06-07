@@ -2,7 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@400;500;600;700&display=swap');
+
 @layer base {
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: system-ui, -apple-system, sans-serif; }
+  
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  .btn-red {
+    @apply bg-red-600 text-white font-bold px-6 py-3 uppercase tracking-wider text-sm border border-red-500 hover:bg-red-500 transition-colors cursor-pointer inline-flex items-center gap-2;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+  }
+
+  .btn-yellow {
+    @apply bg-transparent text-yellow-400 font-bold px-6 py-3 uppercase tracking-wider text-sm border-2 border-yellow-400 hover:bg-yellow-400 hover:text-black transition-colors cursor-pointer inline-flex items-center gap-2;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+  }
+
+  .condition-badge {
+    @apply text-black text-xs font-bold px-2 py-0.5 uppercase inline-block;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .featured-badge {
+    @apply bg-yellow-400 text-black text-xs font-bold px-2 py-0.5 uppercase flex items-center gap-1;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .card-dark {
+    background: #242424;
+    border: 1px solid #333;
+  }
+
+  .section-title {
+    color: #facc15;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0.05em;
+    font-size: 1.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title-line {
+    flex: 1;
+    height: 1px;
+    background: #dc2626;
+  }
+
+  .nav-link {
+    color: #d1d5db;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    font-family: 'Share Tech Mono', monospace;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: #facc15;
+  }
+
+  .category-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid #444;
+    color: #9ca3af;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.2s;
+  }
+
+  .category-btn:hover {
+    border-color: #ef4444;
+    color: white;
+  }
+
+  .category-btn.active {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: white;
+  }
 }

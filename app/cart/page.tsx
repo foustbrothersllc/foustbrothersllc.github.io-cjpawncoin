@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, subtotal, clearCart } = useCart()
+  const { items, removeItem, updateQuantity, subtotal } = useCart()
   const [loading, setLoading] = useState(false)
 
   const handleCheckout = async () => {
@@ -23,61 +23,57 @@ export default function CartPage() {
 
   if (items.length === 0) {
     return (
-      <div className="max-w-2xl mx-auto px-4 py-24 text-center">
-        <p className="text-6xl mb-6">🛒</p>
-        <h1 className="text-2xl font-bold text-navy mb-4">Your cart is empty</h1>
-        <p className="text-gray-500 mb-8">Find something you love in our inventory.</p>
-        <Link href="/" className="bg-gold text-navy font-bold px-8 py-3 rounded-lg hover:bg-gold-dark transition-colors">
-          Shop Now
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '5rem 1rem', textAlign: 'center' }}>
+        <p style={{ fontSize: '4rem', marginBottom: '1rem' }}>🛒</p>
+        <h1 style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '2rem', color: '#facc15', letterSpacing: '0.05em', marginBottom: '1rem' }}>YOUR CART IS EMPTY</h1>
+        <p style={{ fontFamily: 'Share Tech Mono, monospace', color: '#9ca3af', fontSize: '0.8rem', marginBottom: '2rem' }}>Find something you love in our inventory.</p>
+        <Link href="/browse" style={{ backgroundColor: '#dc2626', color: 'white', padding: '1rem 2rem', textDecoration: 'none', fontFamily: 'Bebas Neue, cursive', fontSize: '1.1rem', letterSpacing: '0.1em' }}>
+          SHOP NOW
         </Link>
       </div>
     )
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-2xl font-bold text-navy mb-8">Your Cart</h1>
+    <div style={{ maxWidth: '900px', margin: '0 auto', padding: '2rem 1rem' }}>
+      <h1 style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '2rem', color: '#facc15', letterSpacing: '0.05em', marginBottom: '2rem' }}>YOUR CART</h1>
 
-      <div className="space-y-4 mb-8">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
         {items.map((item) => (
-          <div key={item.id} className="flex items-center gap-4 bg-white rounded-xl p-4 border border-gray-100">
-            <div className="w-20 h-20 relative rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+          <div key={item.id} style={{ backgroundColor: '#242424', border: '1px solid #333', padding: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ width: '70px', height: '70px', position: 'relative', backgroundColor: '#1a1a1a', flexShrink: 0 }}>
               {item.image_url ? (
-                <Image src={item.image_url} alt={item.name} fill className="object-cover" />
+                <Image src={item.image_url} alt={item.name} fill style={{ objectFit: 'cover' }} />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-2xl">📦</div>
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>📦</div>
               )}
             </div>
 
-            <div className="flex-1">
-              <h3 className="font-semibold text-navy">{item.name}</h3>
-              <p className="text-gold-dark font-bold">${item.price.toFixed(2)}</p>
+            <div style={{ flex: 1 }}>
+              <h3 style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '0.85rem', color: '#e0e0e0', marginBottom: '0.25rem' }}>{item.name}</h3>
+              <p style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '1.1rem', color: '#facc15' }}>${item.price.toFixed(2)}</p>
             </div>
 
-            <div className="flex items-center gap-2">
-              <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50">−</button>
-              <span className="w-6 text-center font-medium">{item.quantity}</span>
-              <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50">+</button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <button onClick={() => updateQuantity(item.id, item.quantity - 1)} style={{ width: '28px', height: '28px', border: '1px solid #444', backgroundColor: 'transparent', color: '#e0e0e0', cursor: 'pointer', fontFamily: 'Share Tech Mono, monospace' }}>−</button>
+              <span style={{ fontFamily: 'Share Tech Mono, monospace', fontSize: '0.85rem', color: '#e0e0e0', minWidth: '20px', textAlign: 'center' }}>{item.quantity}</span>
+              <button onClick={() => updateQuantity(item.id, item.quantity + 1)} style={{ width: '28px', height: '28px', border: '1px solid #444', backgroundColor: 'transparent', color: '#e0e0e0', cursor: 'pointer', fontFamily: 'Share Tech Mono, monospace' }}>+</button>
             </div>
 
-            <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-red-500 ml-2 text-xl">×</button>
+            <button onClick={() => removeItem(item.id)} style={{ color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.25rem', padding: '0 0.5rem' }}>×</button>
           </div>
         ))}
       </div>
 
-      <div className="bg-white rounded-xl p-6 border border-gray-100">
-        <div className="flex justify-between text-lg font-bold text-navy mb-6">
-          <span>Subtotal</span>
-          <span>${subtotal.toFixed(2)}</span>
+      <div style={{ backgroundColor: '#242424', border: '1px solid #333', padding: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+          <span style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '1.25rem', color: '#e0e0e0', letterSpacing: '0.05em' }}>SUBTOTAL</span>
+          <span style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '1.5rem', color: '#facc15' }}>${subtotal.toFixed(2)}</span>
         </div>
-        <button
-          onClick={handleCheckout}
-          disabled={loading}
-          className="w-full bg-gold text-navy font-bold py-4 rounded-lg hover:bg-gold-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed text-lg"
-        >
-          {loading ? 'Redirecting to checkout...' : 'Proceed to Checkout'}
+        <button onClick={handleCheckout} disabled={loading} style={{ width: '100%', backgroundColor: '#dc2626', color: 'white', border: 'none', padding: '1rem', fontFamily: 'Bebas Neue, cursive', fontSize: '1.25rem', letterSpacing: '0.1em', cursor: 'pointer', opacity: loading ? 0.7 : 1 }}>
+          {loading ? 'REDIRECTING...' : 'PROCEED TO CHECKOUT'}
         </button>
-        <p className="text-center text-sm text-gray-400 mt-3">Secure checkout powered by Stripe</p>
+        <p style={{ textAlign: 'center', fontFamily: 'Share Tech Mono, monospace', fontSize: '0.65rem', color: '#6b7280', marginTop: '0.75rem' }}>SECURED BY STRIPE 🔒</p>
       </div>
     </div>
   )

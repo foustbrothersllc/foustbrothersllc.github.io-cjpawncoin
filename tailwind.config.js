@@ -9,15 +9,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        navy: {
-          DEFAULT: '#0f172a',
-          light: '#1e293b',
+        brand: {
+          bg: '#1a1a1a',
+          card: '#242424',
+          border: '#333333',
+          red: '#dc2626',
+          yellow: '#facc15',
         },
-        gold: {
-          DEFAULT: '#f59e0b',
-          dark: '#d97706',
-          light: '#fcd34d',
-        },
+      },
+      fontFamily: {
+        display: ['Bebas Neue', 'cursive'],
+        mono: ['Share Tech Mono', 'monospace'],
+        body: ['Barlow', 'sans-serif'],
       },
     },
   },
