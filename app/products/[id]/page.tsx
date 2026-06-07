@@ -4,8 +4,9 @@ import Image from 'next/image'
 import AddToCartButton from '@/components/AddToCartButton'
 import { conditionColor } from '@/components/ProductCard'
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const item = await getInventoryItem(params.id)
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const item = await getInventoryItem(id)
   if (!item) notFound()
 
   return (
