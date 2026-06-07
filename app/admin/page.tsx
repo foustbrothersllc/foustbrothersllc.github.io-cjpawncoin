@@ -1,16 +1,17 @@
 import { getInventory, getAllOrders } from '@/lib/actions'
 import AdminPanel from '@/components/AdminPanel'
+import { InventoryItem, Order } from '@/types/database'
 
 export const dynamic = 'force-dynamic'
 
 export default async function AdminPage() {
-  let inventory = []
-  let orders = []
+  let inventory: InventoryItem[] = []
+  let orders: Order[] = []
 
   try {
     const [inv, ord] = await Promise.all([getInventory(), getAllOrders()])
     inventory = inv
-    orders = ord ?? []
+    orders = (ord ?? []) as Order[]
   } catch (e) {
     console.error('Admin page error:', e)
   }
